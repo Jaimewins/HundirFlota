@@ -4,154 +4,151 @@ var app        = express();                 // definimos la app usando express
 var bodyParser = require('body-parser'); //
 
 var UsersModel  = require('./models/userModel');
-/*
-UsersModel.create(
-    {
-    "name": "Jandu",
-    "email": "cachoperro@yopmail.com"
-    }
-);
-
-UsersModel.findOne({
-    "email": "cachoperro@yopmail.com"},
-    function (err, doc) {
-        if(err){
-            console.log(err);
-            return;
-        }
-
-        console.log(doc.name);
-        
-        doc.name = "Pepito";
-        doc.save(); 
-
-        console.log(doc.name);
-    }
-);
-
-UsersModel.find({
-    "email": "cachoperro@yopmail.com"},
-    function (err, docs) {
-        if(err){
-            console.log(err);
-            return;
-        }
-
-        docs.forEach(doc => {
-            console.log(doc.name + " "+ doc.email+ " "+ doc._id);            
-        });
-    }
-);
-*/
-// configuramos la app para que use bodyParser(), esto nos dejara usar la informacion de los POST
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-var port = process.env.PORT || 8080;        // seteamos el puerto
-
-var router = express.Router();   //Creamos el router de express
-
-// Seteamos la ruta principal
-router.get('/', function(req, res) {
-    res.json({ message: 'Hooolaa :)'});
-});
-
-
-var gameonline = express.Router();
-
-gameonline.get('/', function(req, res) {
-    res.json({ message: 'Api GameOnline :)'});
-});
-
-
-gameonline.post('/user', function(req,res){
-        console.log("paso por user post");
-        console.log(req.body);
-        if(req.body.name != null && req.body.email != null){
-            UsersModel.create(
-                {
-                "name": req.body.name,
-                "email": req.body.email
-                }, 
-                function(err){
-                    if(err){ res.end(err)}
-                    else{ res.end("Usuario insertado correctamente")}
-                }
-            );
-        }else{
-            res.end('ERROR');
-        }
-    }
-);
 
 //======================================================
-var ahorcado = express.Router();
+var baquitos = express.Router();
 
-function codifica(entrada){
-    var salida="";
 
-    for (var i = 0; i< entrada.length; i++){
-        salida+="*";
-    }
+// VARIABLES
+var matriz = new Array(2);
 
-    return salida;
-}
+var barcoPeque = [];
+var barcoMediano = [];
+var barcoGrande = [];
 
-function existecaracter(letra, palabra){
-    return palabra.indexOf(letra)>=0;
-}
+var indexBarco = 0;
+var tablaDirecciones = [0, 1, -1];
+var barcoColocar = [] 
 
-function procesacaractercifrado(letra){
-    var actual="";
-    for(var i=0; i< palabraActual.length;i++){
-        if(palabraActual.charAt(i) == letra){
-            actual+=letra;
-        }else{
-            actual+=palabraActualCifrada.charAt(i);
+var posInitX = 0;
+var posInitY = 0;
+
+// METODOS
+
+function ColocarBarcosPlayer(arrayBarcos){
+
+    for (let i = 0; i < arrayBarcos.length; i++) {
+        for (let j = 0; j < arrayBarcos[i].length; j++) {
+            
+            matriz[i][j] = arrayBarcos[i][j];
         }
     }
-    palabraActualCifrada = actual;
 }
 
-var palabras = [ 'PEPITO', 'JUANITO', 'MARQUITO', 'BOLLICAO'];
-var indicepalabra = 0;
 
-var palabraActual = palabras[indicepalabra];
-var palabraActualCifrada = codifica(palabraActual);
+function ComprobarBarcos(x, y){
+    
+    var direccionX = x;
+    var direccionY = y;
+    
+    barcoColocar.push(matrix[posInitX][posInitY]);
 
+    for (let i = 1; i <= 2; i++) {
 
-ahorcado.get('/currentword', function(req, res) {
+        if(posInitX+(i*tablaDirecciones[direccionX]) < 10 && posInitY+(i*tablaDirecciones[direccionY]) < 10 ){
+
+            if(matrix[posInitX+(i*tablaDirecciones[direccionX])][posInitY+(i*tablaDirecciones[direccionY])] == "A"){
+
+                barcoColocar.push(matrix[posInitX+(i*tablaDirecciones[direccionX])][posInitY+(i*tablaDirecciones[direccionY])]);
+            } else {
+
+                if(direccionY == 1 && direccionY == 0){
+                    
+                    barcoColocar = [] 
+                    ComprobarBarcos(0, 1)
+                } else if(direccionX == 0 && direccionY == 1){
+                    
+                    barcoColocar = [] 
+                    ComprobarBarcos(2, 0)
+                } else if(direccionX == 2 && direccionY == 0){
+                    
+                    barcoColocar = [] 
+                    ComprobarBarcos(0, 2)
+                } else{
+                    
+                    return false;
+                } 
+            }
+        } else {
+
+            return false;
+        }
+    } 
+
+    return true;
+}
+
+function ColocarBarcosIA(){
+
+    do{
+
+        posInitX = Math.floor(Math.random() * 10);
+        posInitY = Math.floor(Math.random() * 10);
+    } while(!matrix[posInitX][posInitY] == "A")
+
+    if(ComprobarBarcos(1, 0)){
+        
+        switch (indexBarco) {
+            case 0:
+                
+                indexBarco = 1;
+                barcoPeque = barcoColocar;
+                barcoColocar = [] 
+                ColocarBarcosIA();
+                break;
+            case 1:
+
+                indexBarco = 2;
+                barcoMediano = barcoColocar;
+                barcoColocar = [] 
+                ColocarBarcosIA();
+                break;
+            case 2:
+        
+                barcoGrande = barcoColocar;
+                barcoColocar = [] 
+                break;
+            default:
+                break;
+        }
+
+    } else {
+
+        ColocarBarcosIA();
+    }
+          
+}
+
+//LLAMADAS
+
+baquitos.get('/cargamatriz', function(req, res) {
+
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+            
+            matriz[i][j] = "A";
+        }
+    }
+
     res.json({ "word": palabraActualCifrada});
 });
 
 
-ahorcado.post('/playword', function(req, res) {
-    if(req.body.word){
-        if(palabraActual == req.body.word){
-            //cambiar de palabra
-            indicepalabra++;
-            indicepalabra%=palabras.length;  //-> indicepalabra = indicepalabra % palabras.length;
-            palabraActual = palabras[indicepalabra];
-            palabraActualCifrada = codifica(palabraActual);
-            res.json({ "status": "WIN"});    
-        }else{
-            res.json({ "status": "NOOK"});
-        }
+baquitos.get('/colocarbarcosplayer', function(req, res) {
+    if(req.body.barcos){
+        
+        ColocarBarcosPlayer();
+        ColocarBarcosIA();
     }else{
         res.json({ "status": "ERROR"});
     }
 });
 
-ahorcado.post('/playletter', function(req, res) {
-    console.log(req.body.letter);
-    if(req.body.letter && req.body.letter.length==1){
-        if(existecaracter(req.body.letter, palabraActual)){
-            //procesar palabraactualcifrada
-            procesacaractercifrado(req.body.letter);
-            res.json({ "status": "OK", "word": palabraActualCifrada});
-        }else{
-            res.json({ "status": "NOOK", "word": palabraActualCifrada});
-        }
+
+baquitos.post('/disparar', function(req, res) {
+    if(req.body.word){
+        
+        
     }else{
         res.json({ "status": "ERROR"});
     }
@@ -159,9 +156,7 @@ ahorcado.post('/playletter', function(req, res) {
 
 
 // Le decimos a la aplicación que utilize las rutas que agregamos
-app.use('/api', router);
-app.use('/gameonline', gameonline);
-app.use('/ahorcado', ahorcado);
+app.use('/baquitos', baquitos);
 
 // Iniciamos el servidor
 app.listen(port);
