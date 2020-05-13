@@ -226,7 +226,6 @@ baquitos.get('/colocarbarcos', function(req, res) {
     }
 });
 
-
 baquitos.post('/dispararplayer', function(req, res) {
     if(req.body.coordenadaPlayer){
         
