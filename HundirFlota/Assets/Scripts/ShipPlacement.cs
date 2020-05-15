@@ -44,83 +44,83 @@ public class ShipPlacement : MonoBehaviour
         currentY = Number.GetComponent<Text>().text;
         if (currentX == "A")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (-40, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (-40, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
         }
         else if (currentX == "B")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (50, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (50, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
         }
         else if (currentX == "C")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (150, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (150, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
         }
         else if (currentX == "D")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (240, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (240, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
         }
         else if (currentX == "E")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (340, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (340, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
         }
         else if (currentX == "F")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (430, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (430, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
         }
         else if (currentX == "G")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (530, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (530, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
         }
         else if (currentX == "H")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (620, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (620, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
         }
         else if (currentX == "I")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (720, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (720, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
         }
         else if (currentX == "J")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (810, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (810, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
         }
         if (currentY == "1")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, 390);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, 390);
         }
         else if (currentY == "2")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, 300);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, 300);
         }
         else if (currentY == "3")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, 200);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, 200);
         }
         else if (currentY == "4")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, 110);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, 110);
         }
         else if (currentY == "5")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, 10);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, 10);
         }
         else if (currentY == "6")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, -80);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, -80);
         }
         else if (currentY == "7")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, -180);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, -180);
         }
         else if (currentY == "8")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, -270);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, -270);
         }
         else if (currentY == "9")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, -370);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, -370);
         }
         else if (currentY == "10")
         {
-            gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, -460);
+            currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, -460);
         }
         if (place == true && place2 == true)
         {
