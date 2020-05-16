@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ShipPlacement : MonoBehaviour
 {
@@ -30,6 +31,9 @@ public class ShipPlacement : MonoBehaviour
     void Start()
     {
         currentShip = gran;
+        gran.GetComponent<BoxCollider2D>().enabled = false;
+        med.GetComponent<BoxCollider2D>().enabled = false;
+        peq.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     // Update is called once per frame
@@ -82,6 +86,10 @@ public class ShipPlacement : MonoBehaviour
         {
             currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (810, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
         }
+        else
+        {
+            SceneManager.LoadScene("ShipPlacement");
+        }
         if (currentY == "1")
         {
             currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, 390);
@@ -122,12 +130,17 @@ public class ShipPlacement : MonoBehaviour
         {
             currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (currentShip.GetComponent<RectTransform>().anchoredPosition.x, -460);
         }
+        else
+        {
+            SceneManager.LoadScene("ShipPlacement");
+        }
         if (place == true && place2 == true)
         {
             SentidoPequeño = currentDegree;
             currentDegree = 0;
             PosXP = currentX;
             PosYP = currentY;
+            currentShip.GetComponent<BoxCollider2D>().enabled = true;
         }
         if (place == true && place2 == false)
         {
@@ -136,6 +149,7 @@ public class ShipPlacement : MonoBehaviour
             PosXM = currentX;
             PosYM = currentY;
             place2 = true;
+            currentShip.GetComponent<BoxCollider2D>().enabled = true;
             currentShip = peq;
         }
         if (place == false)
@@ -145,6 +159,7 @@ public class ShipPlacement : MonoBehaviour
             PosXG = currentX;
             PosYG = currentY;
             place = true;
+            currentShip.GetComponent<BoxCollider2D>().enabled = true;
             currentShip = med;
         }
     }
