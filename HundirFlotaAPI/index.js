@@ -12,6 +12,7 @@ var port = process.env.PORT || 8080;
 
 // VARIABLES
 var matriz = new Array();
+var matrizIA = new Array();
 
 var barcoPeque = [];
 var barcoMediano = [];
@@ -19,19 +20,20 @@ var barcoGrande = [];
 
 var indexBarco = 0;
 var tablaDirecciones = [0, 1, -1];
-var barcoColocar = [] 
 
 var posInitX = 0;
 var posInitY = 0;
 
-var direccionBarco = []
+var direccionBarco = [];
 
-var listaDisparosIA = []
+var listaDisparosIA = [];
 // METODOS
 
 var vidaBarcoPequeno = 2;
 var vidaBarcoMediano = 4;
 var vidaBarcoGrande = 6;
+
+var putBarcos = true;
 
 function parsearDireccio(grados){
 
@@ -54,103 +56,97 @@ function ColocarBarcos(identificador, posInicial, direccion, tamanoBarco){
 
     arrayDireccion =  parsearDireccio(direccion);
 
-    console.log(arrayDireccion);
     for (let i = 0; i < tamanoBarco; i++) {
-        console.log(posInicial[0]+(arrayDireccion[1]*i));
         
         matriz[(posInicial[0]+(arrayDireccion[1]*i))][(posInicial[1]+(arrayDireccion[0]*i))] = identificador;
     }
 }
 
+function ColocarBarcosIA2(tipo, tipoBarco){
 
-function ComprobarBarcos(x, y, tipoBarco){
+    var top = true;
+    var down = true;
+    var right = true;
+    var left = true;
+    var posInit;
     
-    var direccionX = x;
-    var direccionY = y;
-    direccionBarco = [x, y]
-
-    barcoColocar.push(matrix[posInitX][posInitY]);
-
-    for (let i = 1; i <= tipoBarco; i++) {
-
-        if(posInitX+(i*tablaDirecciones[direccionX]) < 10 && posInitY+(i*tablaDirecciones[direccionY]) < 10 ){
-
-            if(matrix[posInitX+(i*tablaDirecciones[direccionX])][posInitY+(i*tablaDirecciones[direccionY])] != "A"){
-
-                if(direccionX == 1 && direccionY == 0){
-                    
-                    ComprobarBarcos(0, 1, tipoBarco);
-                } else if(direccionX == 0 && direccionY == 1){
-                    
-                    ComprobarBarcos(2, 0, tipoBarco);
-                } else if(direccionX == 2 && direccionY == 0){
-                    
-                    ComprobarBarcos(0, 2, tipoBarco);
-                } else{
-                    
-                    return false;
-                } 
-            }
-        } else {
-
-            return false;
-        }
-    } 
-
-    return true;
-}
-
-function ColocarBarcosIA(tipoBarco){
-
     do{
+        putBarcos = false;
 
-        posInitX = Math.floor(Math.random() * 10);
-        posInitY = Math.floor(Math.random() * 10);
-    } while(!matrix[posInitX][posInitY] == "A");
- 
-    switch (indexBarco) {
-        case 0:
+        do{
+
+            posInitX = Math.floor(Math.random() * 10);
+            posInitY = Math.floor(Math.random() * 10);
+        } while(!matriz[posInitX][posInitY] == "A");
+        
+        posInit = [posInitX, posInitY]
+
+        for (let i = 1; i < tipoBarco; i++) {
             
-            if(ComprobarBarcos(1, 0, tipoBarco)){
-
-                indexBarco = 1;
-                barcoPeque = [posInitX, posInitY];
-                ColocarBarcos("PIA", barcoPeque, direccionBarco, tipoBarco)
-                barcoColocar = [];
+            if(posInitX+(tipoBarco-1) < 9){
+                if(!matriz[posInitX+(i*1)][posInitY+(i*0)] == "A"){
+                    
+                    down = false;  
+                } 
             } else {
-
-                ColocarBarcosIA(4);
-            }            
-            break;
-        case 1:
-
-            if(ComprobarBarcos(1, 0, tipoBarco)){
-
-                indexBarco = 2;
-                barcoMediano = [posInitX, posInitY];
-                ColocarBarcos("MIA", barcoMediano, direccionBarco, tipoBarco)
-                barcoColocar = [];
-            } else {
-
-                ColocarBarcosIA(6);
-            }  
-            break;
-        case 2:
-    
-            if(ComprobarBarcos(1, 0, tipoBarco)){
-
-                indexBarco = 2;
-                barcoGrande = [posInitX, posInitY];
-                ColocarBarcos("GIA", barcoGrande, direccionBarco, tipoBarco)
-                barcoColocar = [];
-            } else {
-
-                ColocarBarcosIA(6);
+                down = false; 
             }
-            break;
-        default:
-            break;
-    }
+
+            if(posInitY+(tipoBarco-1) < 9){
+                if(!matriz[posInitX+(i*0)][posInitY+(i*1)] == "A"){
+
+                    left = false;
+                }   
+            } else {
+                left = false;
+            }
+
+            if(posInitX - (tipoBarco-1) > 0){
+                if(!matriz[posInitX+(i*(-1))][posInitY+(i*0)] == "A"){
+
+                    top = false;   
+                }
+            } else {
+                top = false;
+
+            }
+
+            if(posInitY - (tipoBarco-1) > 0){
+                if(!matriz[posInitX+(i*0)][posInitY+(i*(-1))] == "A"){
+
+                    right = false;  
+                }
+            } else {
+                right = false; 
+            }
+        }
+
+        if(down){
+            
+            putBarcos = true;
+            direccionBarco = [1, 0];
+        } else if(left){
+            
+            putBarcos = true;
+            direccionBarco = [0, 1];
+        } else if(top){
+            
+            putBarcos = true;
+            direccionBarco = [-1, 0];
+        } else if(right){
+            
+            putBarcos = true;
+            direccionBarco = [0, -1];
+        } 
+
+    } while(!putBarcos);
+
+    
+    console.log(posInit);
+    console.log(direccionBarco);
+    console.log(tipoBarco);
+
+    ColocarBarcos(tipo, posInit, direccionBarco, tipoBarco);
 }
 
 
@@ -186,7 +182,7 @@ function disparaIA(){
         
         if(coordDispIAX == array[0] && coordDispIAY == array[1]){
 
-            disparaIA()
+            disparaIA();
         }
     });
 
@@ -214,22 +210,27 @@ barquitos.get('/cargamatriz', function(req, res) {
             matriz[i][j] = "A";
         }
     }
-    console.log(matriz);
     res.json();
 });
 
 
 barquitos.post('/colocarbarcos', function(req, res) {
-    console.log("req   " +req.body.json);
+    
     var parseBody = JSON.parse(req.body.json);
     if(req.body.json){
         
         ColocarBarcos(parseBody.tipo, parseBody.posicionInicial, parseBody.direccion, parseBody.tamano);
-        //ColocarBarcosIA(2);
-        console.log(matriz);
     }else{
         res.json({ "status": "ERROR"});
     }
+});
+
+barquitos.get('/colocarbarcosia', function(req, res) {
+
+    ColocarBarcosIA2("GIA", 6);
+    ColocarBarcosIA2("MIA", 4);
+    ColocarBarcosIA2("PIA", 2);
+    console.log(matriz);
 });
 
 barquitos.post('/dispararplayer', function(req, res) {
@@ -263,7 +264,7 @@ barquitos.post('/dispararplayer', function(req, res) {
 barquitos.post('/dispararia', function(req, res) {
     if(req.body.coordenadaPlayer){
         
-        disparaIA()
+        disparaIA();
     }else{
         res.json({ "status": "ERROR"});
     }

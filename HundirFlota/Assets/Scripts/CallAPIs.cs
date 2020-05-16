@@ -55,30 +55,31 @@ private string url = "http://localhost:8080/barquitos/";
         Barcos bP = new Barcos();
 
         bP.tipo = "P";
-        bP.posicionInicial[0] = 5;
-        bP.posicionInicial[1] = 0;
+        bP.posicionInicial[0] = 0;
+        bP.posicionInicial[1] = 5;
         bP.direccion = 0;
         bP.tamano = 2;
 
         Barcos bM = new Barcos();
 
         bM.tipo = "M";
-        bM.posicionInicial[0] = 7;
-        bM.posicionInicial[1] = 0;
+        bM.posicionInicial[0] = 0;
+        bM.posicionInicial[1] = 7;
         bM.direccion = 0;
         bM.tamano = 4;
 
         Barcos bG = new Barcos();
 
         bG.tipo = "G";
-        bG.posicionInicial[0] = 3;
-        bG.posicionInicial[1] = 0;
+        bG.posicionInicial[0] = 0;
+        bG.posicionInicial[1] = 3;
         bG.direccion = 0;
         bG.tamano = 6;
 
         StartCoroutine(ColocarBarcos(bP));
         StartCoroutine(ColocarBarcos(bM));
         StartCoroutine(ColocarBarcos(bG));
+        StartCoroutine(ColocarBarcosIA());
     }
 
     IEnumerator ColocarBarcos(Barcos barcos){
@@ -89,6 +90,25 @@ private string url = "http://localhost:8080/barquitos/";
         form.AddField("json", json);
 
         using (UnityWebRequest webRequest = UnityWebRequest.Post(url + "colocarbarcos", form))
+        {
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.isNetworkError || webRequest.isHttpError)
+            {
+                Debug.Log(webRequest.error);
+                Debug.Log("Ha pasado algo");
+                Debug.Log(webRequest.downloadHandler.text);
+            }
+            else
+            {
+                Debug.Log("Form upload complete!");
+            }
+        }
+    }
+
+    IEnumerator ColocarBarcosIA(){
+    
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url + "colocarbarcosia"))
         {
             yield return webRequest.SendWebRequest();
 
