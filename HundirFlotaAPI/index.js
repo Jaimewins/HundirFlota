@@ -3,14 +3,15 @@ var express    = require('express');        // Utilizaremos express, aqui lo man
 var app        = express();                 // definimos la app usando express
 var bodyParser = require('body-parser'); //
 
-var UsersModel  = require('./models/userModel');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //======================================================
-var baquitos = express.Router();
-
+var barquitos = express.Router();
+var port = process.env.PORT || 8080;
 
 // VARIABLES
-var matriz = new Array(2);
+var matriz = new Array();
 
 var barcoPeque = [];
 var barcoMediano = [];
@@ -36,25 +37,28 @@ function parsearDireccio(grados){
 
     if(grados == 0){
 
-        return [0, -1];
+        return [0, 1];
     } else if(grados == 90){
 
-        return [1, 0];
+        return [-1, 0];
     } else if(grados == 180){
 
-        return [0, 1];
+        return [0, -1];
     } else {
 
-        return [-1, 0];
+        return [1, 0];
     }
 }
 
 function ColocarBarcos(identificador, posInicial, direccion, tamanoBarco){
 
     arrayDireccion =  parsearDireccio(direccion);
-    for (let i = 0; i < tamanoBarco; i++) {
 
-        matriz[posInicial[0+(arrayDireccion[0]*i)]][posInicial[1]+(arrayDireccion[1]*i)] = identificador;
+    console.log(arrayDireccion);
+    for (let i = 0; i < tamanoBarco; i++) {
+        console.log(posInicial[0]+(arrayDireccion[1]*i));
+        
+        matriz[(posInicial[0]+(arrayDireccion[1]*i))][(posInicial[1]+(arrayDireccion[0]*i))] = identificador;
     }
 }
 
@@ -201,32 +205,34 @@ function disparaIA(){
 
 //LLAMADAS
 
-baquitos.get('/cargamatriz', function(req, res) {
+barquitos.get('/cargamatriz', function(req, res) {
 
     for (let i = 0; i < 10; i++) {
+        matriz[i] = [];
         for (let j = 0; j < 10; j++) {
             
             matriz[i][j] = "A";
         }
     }
-
-    res.json({ "word": palabraActualCifrada});
+    console.log(matriz);
+    res.json();
 });
 
 
-baquitos.get('/colocarbarcos', function(req, res) {
-    if(req.body.barcos){
+barquitos.post('/colocarbarcos', function(req, res) {
+    console.log("req   " +req.body.json);
+    var parseBody = JSON.parse(req.body.json);
+    if(req.body.json){
         
-        // desfragmetar json barcos
-
-        ColocarBarcos(identificador, posInicial, direccion, tamanoBarco);
-        ColocarBarcosIA(2);
+        ColocarBarcos(parseBody.tipo, parseBody.posicionInicial, parseBody.direccion, parseBody.tamano);
+        //ColocarBarcosIA(2);
+        console.log(matriz);
     }else{
         res.json({ "status": "ERROR"});
     }
 });
 
-baquitos.post('/dispararplayer', function(req, res) {
+barquitos.post('/dispararplayer', function(req, res) {
     if(req.body.coordenadaPlayer){
         
         if(disparaPlayer(coordenadaPlayer)){
@@ -254,7 +260,7 @@ baquitos.post('/dispararplayer', function(req, res) {
     }
 });
 
-baquitos.post('/dispararia', function(req, res) {
+barquitos.post('/dispararia', function(req, res) {
     if(req.body.coordenadaPlayer){
         
         disparaIA()
@@ -265,7 +271,7 @@ baquitos.post('/dispararia', function(req, res) {
 
 
 // Le decimos a la aplicación que utilize las rutas que agregamos
-app.use('/baquitos', baquitos);
+app.use('/barquitos', barquitos);
 
 // Iniciamos el servidor
 app.listen(port);
