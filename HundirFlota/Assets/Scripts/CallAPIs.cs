@@ -19,11 +19,6 @@ private string url = "http://localhost:8080/barquitos/";
 
     void IniciaPartida()
     {
-        /*frameActual.sprite = ahorcadoFrames[0];
-        palabraCifrada.text = "";
-        texto.text = "";
-        nframeActual = 0;*/
-
         //Cargar primera llamada
         StartCoroutine(CargaMatriz());
     }
@@ -46,6 +41,18 @@ private string url = "http://localhost:8080/barquitos/";
                 Debug.Log("Received: " + webRequest.downloadHandler.text);
             }
         }       
+    }
+
+
+    public void Disparar()
+    {
+        int[] coordenadasDisparoPlayer = new int[2];;
+        coordenadasDisparoPlayer[0] = 1;
+        coordenadasDisparoPlayer[1] = 1;
+
+
+        StartCoroutine(DispararPlayer(coordenadasDisparoPlayer));
+        StartCoroutine(DispararIA());
     }
 
     public void InicializarBarcos()
@@ -109,6 +116,50 @@ private string url = "http://localhost:8080/barquitos/";
     IEnumerator ColocarBarcosIA(){
     
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url + "colocarbarcosia"))
+        {
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.isNetworkError || webRequest.isHttpError)
+            {
+                Debug.Log(webRequest.error);
+                Debug.Log("Ha pasado algo");
+                Debug.Log(webRequest.downloadHandler.text);
+            }
+            else
+            {
+                Debug.Log("Form upload complete!");
+            }
+        }
+    }
+
+    IEnumerator DispararPlayer(int[] coordenadas){
+    
+
+    string json = JsonUtility.ToJson(coordenadas);
+
+    WWWForm form = new WWWForm();
+    form.AddField("json", json);
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Post(url + "dispararplayer", form))
+        {
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.isNetworkError || webRequest.isHttpError)
+            {
+                Debug.Log(webRequest.error);
+                Debug.Log("Ha pasado algo");
+                Debug.Log(webRequest.downloadHandler.text);
+            }
+            else
+            {
+                Debug.Log("Form upload complete!");
+            }
+        }
+    }
+
+    IEnumerator DispararIA(){
+    
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url + "dispararia"))
         {
             yield return webRequest.SendWebRequest();
 
