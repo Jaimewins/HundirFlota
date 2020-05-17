@@ -9,18 +9,23 @@ public class Place : MonoBehaviour
     [SerializeField] private Image med;
     [SerializeField] private Image peq;
     [SerializeField] private CallAPIs callAPIs;
+    [SerializeField] private Text Letter;
+    [SerializeField] private Text Number;
     private int PosGX;
     private int PosGY;
     private int PosMX;
     private int PosMY;
     private int PosPX;
     private int PosPY;
+    private string CX;
+    private string CY;
 
     
 
     Barcos bP = new Barcos();
     Barcos bM = new Barcos();
     Barcos bG = new Barcos();
+    Coordenadas coordenada = new Coordenadas();
 
     // Start is called before the first frame update
     void Start()
@@ -363,5 +368,19 @@ public class Place : MonoBehaviour
 
         return numero;
     }
-    
+
+    public void shot()
+    {
+        CX = Letter.GetComponent<Text>().text;
+        CY = Number.GetComponent<Text>().text;
+        if (CX == "A" || CX == "B" || CX == "C" || CX == "D" || CX == "E" || CX == "F" || CX == "G" || CX == "H" || CX == "I" || CX == "J")
+        {
+            if (CY == "1" || CY == "2" || CY == "3" || CY == "4" || CY == "5" || CY == "6" || CY == "7" || CY == "8" || CY == "9" || CY == "10")
+            {
+                coordenada[1] = changeLetterToInt(Letter.GetComponent<Text>().text);
+                coordenada[0] = int.Parse(Number.GetComponent<Text>().text);
+                CallAPIs.Disparar(coordenada);
+            }
+        }
+    }
 }
