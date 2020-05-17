@@ -26,10 +26,12 @@ public class ShipPlacement : MonoBehaviour
     private string currentY;
     private bool place = false;
     private bool place2 = false;
+    public bool listo = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.DeleteAll();
         currentShip = gran;
         gran.GetComponent<BoxCollider2D>().enabled = false;
         med.GetComponent<BoxCollider2D>().enabled = false;
@@ -44,8 +46,11 @@ public class ShipPlacement : MonoBehaviour
 
     public void SendShip()
     {
-        currentX = Letter.GetComponent<Text>().text;
-        currentY = Number.GetComponent<Text>().text;
+        if (listo == false)
+        {
+            currentX = Letter.GetComponent<Text>().text;
+            currentY = Number.GetComponent<Text>().text;
+        }
         if (currentX == "A")
         {
             currentShip.GetComponent<RectTransform>().anchoredPosition = new Vector2 (-40, currentShip.GetComponent<RectTransform>().anchoredPosition.y);
@@ -134,13 +139,18 @@ public class ShipPlacement : MonoBehaviour
         {
             SceneManager.LoadScene("ShipPlacement");
         }
-        if (place == true && place2 == true)
+        if (place == true && place2 == true && listo == false)
         {
             SentidoPequeño = currentDegree;
             currentDegree = 0;
             PosXP = currentX;
             PosYP = currentY;
             currentShip.GetComponent<BoxCollider2D>().enabled = true;
+            PlayerPrefs.SetString("Type3", "Pequeño");
+            PlayerPrefs.SetString("XP", PosXP);
+            PlayerPrefs.SetString("YP", PosYP);
+            PlayerPrefs.SetInt("SentidoP", SentidoPequeño);
+            listo = true;
         }
         if (place == true && place2 == false)
         {
@@ -150,6 +160,10 @@ public class ShipPlacement : MonoBehaviour
             PosYM = currentY;
             place2 = true;
             currentShip.GetComponent<BoxCollider2D>().enabled = true;
+            PlayerPrefs.SetString("Type2", "Mediano");
+            PlayerPrefs.SetString("XM", PosXM);
+            PlayerPrefs.SetString("YM", PosYM);
+            PlayerPrefs.SetInt("SentidoM", SentidoMediano);
             currentShip = peq;
         }
         if (place == false)
@@ -160,27 +174,37 @@ public class ShipPlacement : MonoBehaviour
             PosYG = currentY;
             place = true;
             currentShip.GetComponent<BoxCollider2D>().enabled = true;
+            PlayerPrefs.SetString("Type1", "Grande");
+            PlayerPrefs.SetString("XG", PosXG);
+            PlayerPrefs.SetString("YG", PosYG);
+            PlayerPrefs.SetInt("SentidoG", SentidoGrande);
             currentShip = med;
         }
     }
 
     public void TurnLeft()
     {
-        currentShip.GetComponent<RectTransform>().Rotate(0, 0, -90);
-        currentDegree = currentDegree - 90;
-        if (currentDegree == -90)
+        if (listo == false)
         {
-            currentDegree = 270;
+            currentShip.GetComponent<RectTransform>().Rotate(0, 0, -90);
+            currentDegree = currentDegree - 90;
+            if (currentDegree == -90)
+            {
+                currentDegree = 270;
+            }
         }
     }
 
     public void TurnRight()
     {
-        currentShip.GetComponent<RectTransform>().Rotate(0, 0, 90);
-        currentDegree = currentDegree + 90;
-        if (currentDegree == 360)
+        if (listo == false)
         {
-            currentDegree = 0;
+            currentShip.GetComponent<RectTransform>().Rotate(0, 0, 90);
+            currentDegree = currentDegree + 90;
+            if (currentDegree == 360)
+            {
+                currentDegree = 0;
+            }
         }
     }
 }

@@ -418,7 +418,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 188826309}
-        m_MethodName: LoadGame
+        m_MethodName: LoadPlacement
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 188826304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59654e8855dbd2a498d355a497eb9c94, type: 3}
+  m_Script: {fileID: 11500000, guid: 21929b9a9d57d294eabb095a7cebd3c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &207389409

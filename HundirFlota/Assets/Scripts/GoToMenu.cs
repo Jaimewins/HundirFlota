@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NextScene : MonoBehaviour
+public class GoToMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject script;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +17,8 @@ public class NextScene : MonoBehaviour
         
     }
 
-    public void LoadGame()
+    public void ToMenu()
     {
-        if (script.GetComponent<ShipPlacement>().listo == true)
-        {
-            SceneManager.LoadScene("Game");
-        }
+        SceneManager.LoadScene("MainMenu");
     }
 }
