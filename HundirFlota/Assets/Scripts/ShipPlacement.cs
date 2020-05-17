@@ -11,6 +11,7 @@ public class ShipPlacement : MonoBehaviour
     [SerializeField] private Image peq;
     [SerializeField] private Text Letter;
     [SerializeField] private Text Number;
+    [SerializeField] private CallAPIs callAPIs;
     private int SentidoGrande;
     private int SentidoMediano;
     private int SentidoPequeño;
@@ -27,6 +28,11 @@ public class ShipPlacement : MonoBehaviour
     private bool place = false;
     private bool place2 = false;
     public bool listo = false;
+    
+
+    Barcos bP = new Barcos();
+    Barcos bM = new Barcos();
+    Barcos bG = new Barcos();
 
     // Start is called before the first frame update
     void Start()
@@ -151,6 +157,13 @@ public class ShipPlacement : MonoBehaviour
             PlayerPrefs.SetString("YP", PosYP);
             PlayerPrefs.SetInt("SentidoP", SentidoPequeño);
             listo = true;
+            bP.tipo = "P";
+            bP.posicionInicial[1] = changeLetterToInt(PlayerPrefs.GetString("XP"));;
+            bP.posicionInicial[0] = int.Parse(PlayerPrefs.GetString("YP"))-1;
+            bP.direccion = PlayerPrefs.GetInt("SentidoP");
+            bP.tamano = 2;  
+            callAPIs.InicializarBarcoP(bP);
+
         }
         if (place == true && place2 == false)
         {
@@ -165,6 +178,13 @@ public class ShipPlacement : MonoBehaviour
             PlayerPrefs.SetString("YM", PosYM);
             PlayerPrefs.SetInt("SentidoM", SentidoMediano);
             currentShip = peq;
+            bM.tipo = "M";
+            bM.posicionInicial[1] = changeLetterToInt(PlayerPrefs.GetString("XM"));;
+            bM.posicionInicial[0] = int.Parse(PlayerPrefs.GetString("YM"))-1;
+            bM.direccion = PlayerPrefs.GetInt("SentidoM");
+            bM.tamano = 4;
+            callAPIs.InicializarBarcoM(bM);
+            
         }
         if (place == false)
         {
@@ -179,7 +199,16 @@ public class ShipPlacement : MonoBehaviour
             PlayerPrefs.SetString("YG", PosYG);
             PlayerPrefs.SetInt("SentidoG", SentidoGrande);
             currentShip = med;
+            bG.tipo = "G";
+            bG.posicionInicial[1] = changeLetterToInt(PlayerPrefs.GetString("XG"));
+            bG.posicionInicial[0] = int.Parse(PlayerPrefs.GetString("YG"))-1;
+            bG.direccion = PlayerPrefs.GetInt("SentidoG");
+            bG.tamano = 6;
+            callAPIs.InicializarBarcoG(bG);
+
         }
+
+
     }
 
     public void TurnLeft()
@@ -206,5 +235,48 @@ public class ShipPlacement : MonoBehaviour
                 currentDegree = 0;
             }
         }
+    }
+
+    private int changeLetterToInt(string letra){
+        int numero;
+
+        switch (letra)
+        {
+            case "A":
+                numero = 0;
+                break;
+            case "B":
+                numero = 1;
+                break;
+            case "C":
+                numero = 2;
+                break;
+            case "D":
+                numero = 3;
+                break;
+            case "E":
+                numero = 4;
+                break;
+            case "F":
+                numero = 5;
+                break;
+            case "G":
+                numero = 6;
+                break;
+            case "H":
+                numero = 7;
+                break;
+            case "I":
+                numero = 8;
+                break;
+            case "J":
+                numero = 9;
+                break;
+            default:
+                numero = 0;
+                break;
+        }
+
+        return numero;
     }
 }

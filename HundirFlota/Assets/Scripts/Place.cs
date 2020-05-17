@@ -8,6 +8,7 @@ public class Place : MonoBehaviour
     [SerializeField] private Image gran;
     [SerializeField] private Image med;
     [SerializeField] private Image peq;
+    [SerializeField] private CallAPIs callAPIs;
     private int PosGX;
     private int PosGY;
     private int PosMX;
@@ -282,6 +283,8 @@ public class Place : MonoBehaviour
             default:
                 break;
         }
+
+        callAPIs.InicializarBarcoIA();
     }
 
     // Update is called once per frame
@@ -289,4 +292,6 @@ public class Place : MonoBehaviour
     {
         
     }
+
+    
 }

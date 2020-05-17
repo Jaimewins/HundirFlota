@@ -44,23 +44,22 @@ function parsearDireccio(grados){
     }
 }
 
-function ColocarBarcos(identificador, posInicial, direccion, tamanoBarco, barcosPlayer){
+function ColocarBarcos(identificador, posInicial, direccion, tamanoBarco){
 
-    if(barcosPlayer){
-        arrayDireccion =  parsearDireccio(direccion);
+    arrayDireccion =  parsearDireccio(direccion);
 
-        for (let i = 0; i < tamanoBarco; i++) {
-        
-            matriz[(posInicial[0]+(arrayDireccion[1]*i))][(posInicial[1]+(arrayDireccion[0]*i))] = identificador;
-        }
-    } else {
-
-        for (let i = 0; i < tamanoBarco; i++) {
-        
-            matriz[(posInicial[0]+(direccion[1]*i))][(posInicial[1]+(direccion[0]*i))] = identificador;
-        }
+    for (let i = 0; i < tamanoBarco; i++) {
+    
+        matriz[(posInicial[0]+(arrayDireccion[1]*i))][(posInicial[1]+(arrayDireccion[0]*i))] = identificador;
     }
+}
 
+function ColocarBarcosIA(identificador, posInicial, direccion, tamanoBarco){
+
+    for (let i = 0; i < tamanoBarco; i++) {
+        
+        matriz[(posInicial[0]+(direccion[1]*i))][(posInicial[1]+(direccion[0]*i))] = identificador;
+    }
     
 }
 
@@ -148,7 +147,7 @@ function ColocarBarcosIA2(tipo, tipoBarco){
     console.log(direccionBarco);
     console.log(tipoBarco);
 
-    ColocarBarcos(tipo, posInit, direccionBarco, tipoBarco, false);
+    ColocarBarcosIA(tipo, posInit, direccionBarco, tipoBarco);
 }
 
 
@@ -220,9 +219,11 @@ barquitos.get('/cargamatriz', function(req, res) {
 barquitos.post('/colocarbarcos', function(req, res) {
     
     var parseBody = JSON.parse(req.body.json);
+    console.log(parseBody);
     if(req.body.json){
         
-        ColocarBarcos(parseBody.tipo, parseBody.posicionInicial, parseBody.direccion, parseBody.tamano, true);
+        ColocarBarcos(parseBody.tipo, parseBody.posicionInicial, parseBody.direccion, parseBody.tamano);
+        console.log(matriz);
     }else{
         res.json({ "status": "ERROR"});
     }
