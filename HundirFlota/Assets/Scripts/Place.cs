@@ -377,9 +377,9 @@ public class Place : MonoBehaviour
         {
             if (CY == "1" || CY == "2" || CY == "3" || CY == "4" || CY == "5" || CY == "6" || CY == "7" || CY == "8" || CY == "9" || CY == "10")
             {
-                coordenada[1] = changeLetterToInt(Letter.GetComponent<Text>().text);
-                coordenada[0] = int.Parse(Number.GetComponent<Text>().text);
-                CallAPIs.Disparar(coordenada);
+                coordenada.coordenadas[1] = changeLetterToInt(Letter.GetComponent<Text>().text);
+                coordenada.coordenadas[0] = int.Parse(Number.GetComponent<Text>().text)-1;
+                callAPIs.Disparar(coordenada);
             }
         }
     }

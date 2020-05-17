@@ -215,10 +215,11 @@ private string url = "http://localhost:8080/barquitos/";
             Coordenadas aw = Coordenadas.CreateFromJSON(jsondata);
          
 
-            if (aw.status != "A")
+            if (aw.tipoBarco != "A")
             {
                 // logica
-                Debug.Log("HE DADOD HA:  "+ aw.status);
+                Debug.Log("HE DADOD HA:  "+ aw.tipoBarco);
+                Debug.Log("SI LO HE DESTRUIDO:  "+ aw.destruido);
             }
             else
             {

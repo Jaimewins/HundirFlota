@@ -7,7 +7,7 @@ public class Coordenadas
 {
     public int[] coordenadas = new int[2];
 
-    public string status;
+    public string tipoBarco;
 
     public string destruido;
 

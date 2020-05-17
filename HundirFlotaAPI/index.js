@@ -246,36 +246,36 @@ barquitos.post('/dispararplayer', function(req, res) {
 
             if(vidaBarcoPequeno <= 0){
 
-                res.json({ "status": "PIA", "destruido": "SI"});
+                res.json({ "tipoBarco": "PIA", "destruido": "SI"});
             } else {
 
-                res.json({ "status": "PIA", "destruido": "NO"});
+                res.json({ "tipoBarco": "PIA", "destruido": "NO"});
             }
         } else  if(disparaPlayer(coordenadaPlayer.coordenadas) == "MIA"){
 
             if(vidaBarcoMediano <= 0){
 
-                res.json({ "status": "MIA", "destruido": "SI"});
+                res.json({ "tipoBarco": "MIA", "destruido": "SI"});
             } else {
 
-                res.json({ "status": "MIA", "destruido": "NO"});
+                res.json({ "tipoBarco": "MIA", "destruido": "NO"});
             }
         } else if(disparaPlayer(coordenadaPlayer.coordenadas) == "GIA"){
 
             if(vidaBarcoGrande <= 0){
 
-                res.json({ "status": "GIA", "destruido": "SI"});
+                res.json({ "tipoBarco": "GIA", "destruido": "SI"});
             } else {
 
-                res.json({ "status": "GIA", "destruido": "NO"});
+                res.json({ "tipoBarco": "GIA", "destruido": "NO"});
             }
         }  else {
 
-            res.json({ "status": "A", "destruido": "NO"});
+            res.json({ "tipoBarco": "A", "destruido": "NO"});
         }
         
     }else{
-        res.json({ "status": "ERROR"});
+        res.json({ "tipoBarco": "ERROR"});
     }
 });
 
