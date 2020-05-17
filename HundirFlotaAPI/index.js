@@ -12,14 +12,6 @@ var port = process.env.PORT || 8080;
 
 // VARIABLES
 var matriz = new Array();
-var matrizIA = new Array();
-
-var barcoPeque = [];
-var barcoMediano = [];
-var barcoGrande = [];
-
-var indexBarco = 0;
-var tablaDirecciones = [0, 1, -1];
 
 var posInitX = 0;
 var posInitY = 0;

@@ -44,44 +44,14 @@ private string url = "http://localhost:8080/barquitos/";
     }
 
 
-    public void Disparar()
+    public void Disparar(Coordenadas coordenadas)
     {
-        int[] coordenadasDisparoPlayer = new int[2];;
-        coordenadasDisparoPlayer[0] = 1;
-        coordenadasDisparoPlayer[1] = 1;
-
-
-        StartCoroutine(DispararPlayer(coordenadasDisparoPlayer));
+        StartCoroutine(DispararPlayer(coordenadas));
         StartCoroutine(DispararIA());
     }
 
-    public void InicializarBarcos()
+    public void InicializarBarcos(Barcos bP, Barcos bM, Barcos bG)
     {
-        button.interactable = false;
-
-        Barcos bP = new Barcos();
-
-        bP.tipo = "P";
-        bP.posicionInicial[0] = 0;
-        bP.posicionInicial[1] = 5;
-        bP.direccion = 0;
-        bP.tamano = 2;
-
-        Barcos bM = new Barcos();
-
-        bM.tipo = "M";
-        bM.posicionInicial[0] = 0;
-        bM.posicionInicial[1] = 7;
-        bM.direccion = 0;
-        bM.tamano = 4;
-
-        Barcos bG = new Barcos();
-
-        bG.tipo = "G";
-        bG.posicionInicial[0] = 0;
-        bG.posicionInicial[1] = 3;
-        bG.direccion = 0;
-        bG.tamano = 6;
 
         StartCoroutine(ColocarBarcos(bP));
         StartCoroutine(ColocarBarcos(bM));
@@ -132,14 +102,9 @@ private string url = "http://localhost:8080/barquitos/";
         }
     }
 
-    IEnumerator DispararPlayer(int[] coordenadas){
+    IEnumerator DispararPlayer(Coordenadas coordenadas){
     
-    Coordenadas c = new Coordenadas();
-
-    c.coordenadas[0] = 3;
-    c.coordenadas[1] = 6;
-
-    string json = JsonUtility.ToJson(c);
+    string json = JsonUtility.ToJson(coordenadas);
         string jsondata = "";
 
     WWWForm form = new WWWForm();
