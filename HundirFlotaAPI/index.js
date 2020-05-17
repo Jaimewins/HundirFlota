@@ -162,21 +162,21 @@ function ColocarBarcosIA2(tipo, tipoBarco){
 
 function disparaPlayer(coordenadaPlayer){
 
-    if(matriz[coordenadaPlayer[0]][coordenadaPlayer[1]] == "PIA"){
+    if(matriz[coordenadaPlayer[1]][coordenadaPlayer[0]] == "PIA"){
 
         vidaBarcoPequeno--;
-        return true;
-    } else if(matriz[coordenadaPlayer[0]][coordenadaPlayer[1]] == "MIA"){
+        return "PIA";
+    } else if(matriz[coordenadaPlayer[1]][coordenadaPlayer[0]] == "MIA"){
 
         vidaBarcoMediano--;
-        return true;
-    } else if(matriz[coordenadaPlayer[0]][coordenadaPlayer[1]] == "GIA"){
+        return "MIA";
+    } else if(matriz[coordenadaPlayer[1]][coordenadaPlayer[0]] == "GIA"){
 
         vidaBarcoGrande--;
-        return true;
+        return "GIA";
     } else {
         
-        return false;
+        return "A";
     }
 }
 
@@ -197,16 +197,6 @@ function disparaIA(){
     });
 
     listaDisparosIA.push([coordDispIAX][coordDispIAY]);
-
-    if(listaDisparosIA.lastIndexOf() == "P"){
-
-    } else if(listaDisparosIA.lastIndexOf() == "M"){
-
-    } else if(listaDisparosIA.lastIndexOf() == "G"){
-
-    } else {
-
-    }
 }
 
 //LLAMADAS
@@ -244,35 +234,49 @@ barquitos.get('/colocarbarcosia', function(req, res) {
 });
 
 barquitos.post('/dispararplayer', function(req, res) {
-    if(req.body.coordenadaPlayer){
+    if(req.body.json){
         
-        if(disparaPlayer(coordenadaPlayer)){
+        var coordenadaPlayer = JSON.parse(req.body.json);
+
+        if(disparaPlayer(coordenadaPlayer.coordenadas) == "PIA"){
 
             if(vidaBarcoPequeno <= 0){
 
-                res.json({ "status": "ERROR", "status": "ERROR"});
-            } else if(vidaBarcoMediano <= 0){
-
-                res.json({ "status": "ERROR", "status": "ERROR"});
-            } else if(vidaBarcoGrande <= 0){
-
-                res.json({ "status": "ERROR", "status": "ERROR"});
+                res.json({ "status": "PIA", "destruido": "SI"});
             } else {
 
-                res.json({ "status": "ERROR", "status": "ERROR"});
+                res.json({ "status": "PIA", "destruido": "NO"});
             }
+        } else  if(disparaPlayer(coordenadaPlayer.coordenadas) == "MIA"){
 
-        } else {
+            if(vidaBarcoMediano <= 0){
 
-            res.json({ "status": "ERROR"});
+                res.json({ "status": "MIA", "destruido": "SI"});
+            } else {
+
+                res.json({ "status": "MIA", "destruido": "NO"});
+            }
+        } else if(disparaPlayer(coordenadaPlayer.coordenadas) == "GIA"){
+
+            if(vidaBarcoGrande <= 0){
+
+                res.json({ "status": "GIA", "destruido": "SI"});
+            } else {
+
+                res.json({ "status": "GIA", "destruido": "NO"});
+            }
+        }  else {
+
+            res.json({ "status": "A", "destruido": "NO"});
         }
+        
     }else{
         res.json({ "status": "ERROR"});
     }
 });
 
 barquitos.post('/dispararia', function(req, res) {
-    
+
     disparaIA();
 });
 

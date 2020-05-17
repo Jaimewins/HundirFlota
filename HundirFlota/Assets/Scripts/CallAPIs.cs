@@ -52,7 +52,7 @@ private string url = "http://localhost:8080/barquitos/";
 
 
         StartCoroutine(DispararPlayer(coordenadasDisparoPlayer));
-        StartCoroutine(DispararIA());
+        //StartCoroutine(DispararIA());
     }
 
     public void InicializarBarcos()
@@ -134,8 +134,13 @@ private string url = "http://localhost:8080/barquitos/";
 
     IEnumerator DispararPlayer(int[] coordenadas){
     
+    Coordenadas c = new Coordenadas();
 
-    string json = JsonUtility.ToJson(coordenadas);
+    c.coordenadas[0] = 3;
+    c.coordenadas[1] = 6;
+
+    string json = JsonUtility.ToJson(c);
+        string jsondata = "";
 
     WWWForm form = new WWWForm();
     form.AddField("json", json);
@@ -153,7 +158,28 @@ private string url = "http://localhost:8080/barquitos/";
             else
             {
                 Debug.Log("Form upload complete!");
+                jsondata = webRequest.downloadHandler.text;
             }
+        }
+
+        // Procesar el JSON y obtener la palabra cifrada
+        if (jsondata != "")
+        {
+            Debug.Log(jsondata);
+            Coordenadas aw = Coordenadas.CreateFromJSON(jsondata);
+         
+
+            if (aw.status != "A")
+            {
+                // logica
+                Debug.Log("HE DADOD HA:  "+ aw.status);
+            }
+            else
+            {
+                Debug.Log("AGUA");
+            }
+        } else {
+            Debug.Log("asgf    " + jsondata);
         }
     }
 
