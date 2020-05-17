@@ -11,6 +11,9 @@ public class Place : MonoBehaviour
     [SerializeField] private CallAPIs callAPIs;
     [SerializeField] private Text Letter;
     [SerializeField] private Text Number;
+    [SerializeField] private AudioClip audioClip1;
+    [SerializeField] private AudioClip audioClip2;
+    [SerializeField] private AudioClip audioClip3;
     private int PosGX;
     private int PosGY;
     private int PosMX;
@@ -26,6 +29,8 @@ public class Place : MonoBehaviour
     Barcos bM = new Barcos();
     Barcos bG = new Barcos();
     Coordenadas coordenada = new Coordenadas();
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -380,7 +385,36 @@ public class Place : MonoBehaviour
                 coordenada.coordenadas[1] = changeLetterToInt(Letter.GetComponent<Text>().text);
                 coordenada.coordenadas[0] = int.Parse(Number.GetComponent<Text>().text)-1;
                 callAPIs.Disparar(coordenada);
+                reproducirSound();
             }
+        }
+    }
+
+    private void reproducirSound(){
+
+        int random = Random.Range(0, 2);
+
+        switch (random)
+        {
+            case 0:
+
+                GetComponent<AudioSource>().clip = audioClip1;
+                GetComponent<AudioSource>().Play();
+                break;
+            case 1:
+                GetComponent<AudioSource>().clip = audioClip2;
+                GetComponent<AudioSource>().Play();
+                break;
+
+            case 2:
+                GetComponent<AudioSource>().clip = audioClip3;
+                GetComponent<AudioSource>().Play();
+                break;
+
+            default:
+                GetComponent<AudioSource>().clip = audioClip1;
+                GetComponent<AudioSource>().Play();
+                break;
         }
     }
 }

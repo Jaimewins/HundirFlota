@@ -217,8 +217,11 @@ private string url = "http://localhost:8080/barquitos/";
 
             if (aw.tipoBarco != "A")
             {
-                // logica
+                // aw contiene los datos de .tipoBarco que son PIA  MIA  GIA o A (este ultimo quiere decir que no has dado a ninguno (AGUA))
+
+                // si tipoBarco devuelve "A" quiere decir que no has acertado a ningun barco
                 Debug.Log("HE DADOD HA:  "+ aw.tipoBarco);
+                // .destruido te dira "SI" si has destruido por completo ese tipo de barco o "NO" si no lo has destruido por completo
                 Debug.Log("SI LO HE DESTRUIDO:  "+ aw.destruido);
             }
             else
@@ -257,7 +260,8 @@ private string url = "http://localhost:8080/barquitos/";
         {
             Debug.Log(jsondata);
             CoordenadasIA aw = CoordenadasIA.CreateFromJSON(jsondata);
-         
+
+            // aw te devuelve la posicion en X y en Y de donde ha disparado la IA
             Debug.Log("DISPARO EN X:  "+ aw.dispX);
             Debug.Log("DISPARO EN Y:  "+ aw.dispY);
             
