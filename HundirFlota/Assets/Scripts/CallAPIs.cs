@@ -52,7 +52,7 @@ private string url = "http://localhost:8080/barquitos/";
 
 
         StartCoroutine(DispararPlayer(coordenadasDisparoPlayer));
-        //StartCoroutine(DispararIA());
+        StartCoroutine(DispararIA());
     }
 
     public void InicializarBarcos()
@@ -184,7 +184,10 @@ private string url = "http://localhost:8080/barquitos/";
     }
 
     IEnumerator DispararIA(){
-    
+        
+        
+        string jsondata = "";
+
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url + "dispararia"))
         {
             yield return webRequest.SendWebRequest();
@@ -198,7 +201,21 @@ private string url = "http://localhost:8080/barquitos/";
             else
             {
                 Debug.Log("Form upload complete!");
+                jsondata = webRequest.downloadHandler.text;
             }
+        }
+
+        // Procesar el JSON y obtener la palabra cifrada
+        if (jsondata != "")
+        {
+            Debug.Log(jsondata);
+            CoordenadasIA aw = CoordenadasIA.CreateFromJSON(jsondata);
+         
+            Debug.Log("DISPARO EN X:  "+ aw.dispX);
+            Debug.Log("DISPARO EN Y:  "+ aw.dispY);
+            
+        } else {
+            Debug.Log("asgf    " + jsondata);
         }
     }
 }

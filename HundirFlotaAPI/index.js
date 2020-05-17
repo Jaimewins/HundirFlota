@@ -184,19 +184,30 @@ function disparaIA(){
 
     var coordDispIAX;
     var coordDispIAY;
+    var coordDispIA = [];
 
-    coordDispIAX = Math.floor(Math.random() * 10);
-    coordDispIAY = Math.floor(Math.random() * 10);
+    coordDispIAX = Math.floor(Math.random() * 9);
+    coordDispIAY = Math.floor(Math.random() * 9);
 
-    array.forEach(listaDisparosIA => {
+    if(listaDisparosIA != []){
+
+        listaDisparosIA.forEach(array => {
         
-        if(coordDispIAX == array[0] && coordDispIAY == array[1]){
+            if(coordDispIAX == array[0] && coordDispIAY == array[1]){
+    
+                disparaIA();
+            }
+        });
+    }
 
-            disparaIA();
-        }
-    });
+    coordDispIA[0] = coordDispIAX
+    coordDispIA[1] = coordDispIAY;
 
-    listaDisparosIA.push([coordDispIAX][coordDispIAY]);
+    listaDisparosIA.push(coordDispIA);
+    
+    console.log(coordDispIA);
+
+    return coordDispIA;
 }
 
 //LLAMADAS
@@ -275,9 +286,12 @@ barquitos.post('/dispararplayer', function(req, res) {
     }
 });
 
-barquitos.post('/dispararia', function(req, res) {
+barquitos.get('/dispararia', function(req, res) {
+     
+    var dispIA = disparaIA();
 
-    disparaIA();
+    console.log(dispIA);
+    res.json({ "dispX": dispIA[0], "dispY": dispIA[1]});
 });
 
 
