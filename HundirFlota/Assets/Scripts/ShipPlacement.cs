@@ -184,35 +184,5 @@ public class ShipPlacement : MonoBehaviour
             PlayerPrefs.SetInt("SentidoG", SentidoGrande);
             currentShip = med;
         }
-
-
-    }
-
-    public void TurnLeft()
-    {
-        if (listo == false)
-        {
-            currentShip.GetComponent<RectTransform>().Rotate(0, 0, -90);
-            currentDegree = currentDegree - 90;
-            if (currentDegree == -90)
-            {
-                currentDegree = 270;
-            }
-        }
-    }
-
-    public void TurnRight()
-    {
-        if (listo == false)
-        {
-            currentShip.GetComponent<RectTransform>().Rotate(0, 0, 90);
-            currentDegree = currentDegree + 90;
-            if (currentDegree == 360)
-            {
-                currentDegree = 0;
-            }
-        }
-    }
-
-    
+    }    
 }

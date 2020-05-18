@@ -248,57 +248,6 @@ public class Place : MonoBehaviour
         gran.GetComponent<RectTransform>().anchoredPosition = new Vector2 (PosGX, PosGY);
         med.GetComponent<RectTransform>().anchoredPosition = new Vector2 (PosMX, PosMY);
         peq.GetComponent<RectTransform>().anchoredPosition = new Vector2 (PosPX, PosPY);
-        switch (PlayerPrefs.GetInt("SentidoG"))
-        {
-            case 0:
-                break;
-            case 90:
-                gran.GetComponent<RectTransform>().Rotate(0, 0, 90);
-                break;
-            case 180:
-                gran.GetComponent<RectTransform>().Rotate(0, 0, 90);
-                gran.GetComponent<RectTransform>().Rotate(0, 0, 90);
-                break;
-            case 270:
-                gran.GetComponent<RectTransform>().Rotate(0, 0, -90);
-                break;
-            default:
-                break;
-        }
-        switch (PlayerPrefs.GetInt("SentidoM"))
-        {
-            case 0:
-                break;
-            case 90:
-                med.GetComponent<RectTransform>().Rotate(0, 0, 90);
-                break;
-            case 180:
-                med.GetComponent<RectTransform>().Rotate(0, 0, 90);
-                med.GetComponent<RectTransform>().Rotate(0, 0, 90);
-                break;
-            case 270:
-                med.GetComponent<RectTransform>().Rotate(0, 0, -90);
-                break;
-            default:
-                break;
-        }
-        switch (PlayerPrefs.GetInt("SentidoP"))
-        {
-            case 0:
-                break;
-            case 90:
-                peq.GetComponent<RectTransform>().Rotate(0, 0, 90);
-                break;
-            case 180:
-                peq.GetComponent<RectTransform>().Rotate(0, 0, 90);
-                peq.GetComponent<RectTransform>().Rotate(0, 0, 90);
-                break;
-            case 270:
-                peq.GetComponent<RectTransform>().Rotate(0, 0, -90);
-                break;
-            default:
-                break;
-        }
 
         bP.tipo = "P";
         bP.posicionInicial[1] = changeLetterToInt(PlayerPrefs.GetString("XP"));;
@@ -386,6 +335,7 @@ public class Place : MonoBehaviour
                 coordenada.coordenadas[0] = int.Parse(Number.GetComponent<Text>().text)-1;
                 callAPIs.Disparar(coordenada);
                 reproducirSound();
+                GetComponent<Manager>().turnosNum = GetComponent<Manager>().turnosNum + 1;
             }
         }
     }

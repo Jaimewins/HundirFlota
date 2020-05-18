@@ -7,6 +7,49 @@ using UnityEngine.UI;
 
 public class CallAPIs : MonoBehaviour
 {
+    private Vector2 Grande1;
+    private Vector2 Grande2;
+    private Vector2 Grande3;
+    private Vector2 Grande4;
+    private Vector2 Grande5;
+    private Vector2 Grande6;
+    private Vector2 Mediano1;
+    private Vector2 Mediano2;
+    private Vector2 Mediano3;
+    private Vector2 Mediano4;
+    private Vector2 Pequeño1;
+    private Vector2 Pequeño2;
+    private Vector2 Comprovacion;
+    private int x;
+    private int y;
+    private int exploX;
+    private int exploY;
+    [SerializeField] Image tick1;
+    [SerializeField] Image tick2;
+    [SerializeField] Image tick3;
+    [SerializeField] Image tick4;
+    [SerializeField] Image tick5;
+    [SerializeField] Image tick6;
+    [SerializeField] Image tick7;
+    [SerializeField] Image tick8;
+    [SerializeField] Image tick9;
+    [SerializeField] Image tick10;
+    [SerializeField] Image tick11;
+    [SerializeField] Image tick12;
+    [SerializeField] Image cross1;
+    [SerializeField] Image cross2;
+    [SerializeField] Image cross3;
+    [SerializeField] Image cross4;
+    [SerializeField] Image cross5;
+    [SerializeField] Image cross6;
+    [SerializeField] Image cross7;
+    [SerializeField] Image cross8;
+    [SerializeField] Image cross9;
+    [SerializeField] Image cross10;
+    [SerializeField] Image cross11;
+    [SerializeField] Image cross12;
+    [SerializeField] GameObject manager;
+    
 
 private string url = "http://localhost:8080/barquitos/";
 
@@ -14,6 +57,7 @@ private string url = "http://localhost:8080/barquitos/";
     private void Awake()
     {
         IniciaPartida();
+        prepararCasillasPlayer();
     }
 
     void IniciaPartida()
@@ -264,9 +308,252 @@ private string url = "http://localhost:8080/barquitos/";
             // aw te devuelve la posicion en X y en Y de donde ha disparado la IA
             Debug.Log("DISPARO EN X:  "+ aw.dispX);
             Debug.Log("DISPARO EN Y:  "+ aw.dispY);
-            
+            Comprovacion = new Vector2(int.Parse(aw.dispX), int.Parse(aw.dispY));
+            if (Comprovacion == Grande1)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross1.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Grande1 = new Vector2(10, 10);
+            }
+            else if (Comprovacion == Grande2)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross2.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Grande2 = new Vector2(10, 10);
+            }
+            else if (Comprovacion == Grande3)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross3.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Grande3 = new Vector2(10, 10);
+            }
+            else if (Comprovacion == Grande4)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross4.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Grande4 = new Vector2(10, 10);
+            }
+            else if (Comprovacion == Grande5)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross5.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Grande5 = new Vector2(10, 10);
+            }
+            else if (Comprovacion == Grande6)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross6.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Grande6 = new Vector2(10, 10);
+            }
+            else if (Comprovacion == Mediano1)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross7.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Mediano1 = new Vector2(10, 10);
+            }
+            else if (Comprovacion == Mediano2)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross8.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Mediano2 = new Vector2(10, 10);
+            }
+            else if (Comprovacion == Mediano3)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross9.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Mediano3 = new Vector2(10, 10);
+            }
+            else if (Comprovacion == Mediano4)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross10.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Mediano4 = new Vector2(10, 10);
+            }
+            else if (Comprovacion == Pequeño1)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross11.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Pequeño1 = new Vector2(10, 10);
+            }
+            else if (Comprovacion == Pequeño2)
+            {
+                exploX = placementX(aw.dispX);
+                exploY = placementY(aw.dispY);
+                cross12.GetComponent<RectTransform>().anchoredPosition = new Vector2 (exploX, exploY);
+                manager.GetComponent<Manager>().recibidoNum = manager.GetComponent<Manager>().recibidoNum - 1;
+                Pequeño2 = new Vector2(10, 10);
+            } 
         } else {
             Debug.Log("asgf    " + jsondata);
         }
+    }
+
+    private void prepararCasillasPlayer()
+    {
+        x = changeLetterToInt(PlayerPrefs.GetString("XG"));
+        y = int.Parse(PlayerPrefs.GetString("YG"))-1;
+        Grande1 = new Vector2 (x, y);
+        Grande2 = new Vector2 (x, y + 1);
+        Grande3 = new Vector2 (x, y + 2);
+        Grande4 = new Vector2 (x, y + 3);
+        Grande5 = new Vector2 (x, y + 4);
+        Grande6 = new Vector2 (x, y + 5);
+        x = changeLetterToInt(PlayerPrefs.GetString("XM"));
+        y = int.Parse(PlayerPrefs.GetString("YM"))-1;
+        Mediano1 = new Vector2 (x, y);
+        Mediano2 = new Vector2 (x, y + 1);
+        Mediano3 = new Vector2 (x, y + 2);
+        Mediano4 = new Vector2 (x, y + 3);
+        x = changeLetterToInt(PlayerPrefs.GetString("XP"));
+        y = int.Parse(PlayerPrefs.GetString("YP"))-1;
+        Mediano1 = new Vector2 (x, y);
+        Mediano2 = new Vector2 (x, y + 1);
+    }
+
+    private int changeLetterToInt(string letra){
+        int numero;
+
+        switch (letra)
+        {
+            case "A":
+                numero = 0;
+                break;
+            case "B":
+                numero = 1;
+                break;
+            case "C":
+                numero = 2;
+                break;
+            case "D":
+                numero = 3;
+                break;
+            case "E":
+                numero = 4;
+                break;
+            case "F":
+                numero = 5;
+                break;
+            case "G":
+                numero = 6;
+                break;
+            case "H":
+                numero = 7;
+                break;
+            case "I":
+                numero = 8;
+                break;
+            case "J":
+                numero = 9;
+                break;
+            default:
+                numero = 0;
+                break;
+        }
+
+        return numero;
+    }
+
+    private int placementX(string coor)
+    {
+        int numero2 = 0;
+        switch (coor)
+        {
+            case "0":
+                numero2 = -40;
+                break;
+            case "1":
+                numero2 = 50;
+                break;
+            case "2":
+                numero2 = 150;
+                break;
+            case "3":
+                numero2 = 240;
+                break;
+            case "4":
+                numero2 = 340;
+                break;
+            case "5":
+                numero2 = 430;
+                break;
+            case "6":
+                numero2 = 530;
+                break;
+            case "7":
+                numero2 = 620;
+                break;
+            case "8":
+                numero2 = 720;
+                break;
+            case "9":
+                numero2 = 810;
+                break;
+            default:
+                break;
+        }
+        return numero2;
+    }
+
+    private int placementY(string coor)
+    {
+        int numero3 = 0;
+        switch (coor)
+        {
+            case "0":
+                numero3 = 390;
+                break;
+            case "1":
+                numero3 = 300;
+                break;
+            case "2":
+                numero3 = 200;
+                break;
+            case "3":
+                numero3 = 110;
+                break;
+            case "4":
+                numero3 = 10;
+                break;
+            case "5":
+                numero3 = -80;
+                break;
+            case "6":
+                numero3 = -180;
+                break;
+            case "7":
+                numero3 = -270;
+                break;
+            case "8":
+                numero3 = -370;
+                break;
+            case "9":
+                numero3 = -460;
+                break;
+            default:
+                break;
+        }
+        return numero3;
     }
 }
