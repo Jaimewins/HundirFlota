@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
     [SerializeField] Text recibido;
+    [SerializeField] Text pegado;
     [SerializeField] Text turnos;
-    public int recibidoNum = 12;
+    public int recibidoNum = 7;
+    public int pegadoNum = 7;
     public int turnosNum = 0;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,15 @@ public class Manager : MonoBehaviour
     void Update()
     {
         recibido.GetComponent<Text>().text = recibidoNum.ToString();
+        pegado.GetComponent<Text>().text = pegadoNum.ToString();
         turnos.GetComponent<Text>().text = turnosNum.ToString();
+        if (recibidoNum <= 0)
+        {
+            SceneManager.LoadScene("Lose");
+        }
+        if (pegadoNum <= 0)
+        {
+            SceneManager.LoadScene("Win");
+        }
     }
 }

@@ -34,11 +34,6 @@ public class CallAPIs : MonoBehaviour
     [SerializeField] Image tick5;
     [SerializeField] Image tick6;
     [SerializeField] Image tick7;
-    [SerializeField] Image tick8;
-    [SerializeField] Image tick9;
-    [SerializeField] Image tick10;
-    [SerializeField] Image tick11;
-    [SerializeField] Image tick12;
     [SerializeField] Image cross1;
     [SerializeField] Image cross2;
     [SerializeField] Image cross3;
@@ -272,6 +267,7 @@ private string url = "http://localhost:8080/barquitos/";
                 Debug.Log("SI LO HE DESTRUIDO:  "+ aw.destruido);
                 directoX = placementDX(changeLetterToInt(PlayerPrefs.GetString("ApuntaX")));
                 directoY = placementDY(int.Parse(PlayerPrefs.GetString("ApuntaY")));
+                manager.GetComponent<Manager>().pegadoNum = manager.GetComponent<Manager>().pegadoNum - 1;
                 if (contador == 0)
                 {
                     tick1.GetComponent<RectTransform>().anchoredPosition = new Vector2 (directoX, directoY);
@@ -305,11 +301,6 @@ private string url = "http://localhost:8080/barquitos/";
                 else if (contador == 6)
                 {
                     tick7.GetComponent<RectTransform>().anchoredPosition = new Vector2 (directoX, directoY);
-                    contador++;
-                }
-                else if (contador == 7)
-                {
-                    tick8.GetComponent<RectTransform>().anchoredPosition = new Vector2 (directoX, directoY);
                     contador++;
                 }
             }
