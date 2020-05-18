@@ -331,6 +331,24 @@ public class Place : MonoBehaviour
         {
             if (CY == "1" || CY == "2" || CY == "3" || CY == "4" || CY == "5" || CY == "6" || CY == "7" || CY == "8" || CY == "9" || CY == "10")
             {
+                if (PlayerPrefs.HasKey("ApuntaX"))
+                {
+                    PlayerPrefs.DeleteKey("ApuntaX");
+                    PlayerPrefs.SetString("ApuntaX", CX);
+                }
+                else 
+                {
+                    PlayerPrefs.SetString("ApuntaX", CX);
+                }
+                if (PlayerPrefs.HasKey("ApuntaY"))
+                {
+                    PlayerPrefs.DeleteKey("ApuntaY");
+                    PlayerPrefs.SetString("ApuntaY", CY);
+                }
+                else 
+                {
+                    PlayerPrefs.SetString("ApuntaY", CY);
+                }
                 coordenada.coordenadas[1] = changeLetterToInt(Letter.GetComponent<Text>().text);
                 coordenada.coordenadas[0] = int.Parse(Number.GetComponent<Text>().text)-1;
                 callAPIs.Disparar(coordenada);

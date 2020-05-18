@@ -24,6 +24,9 @@ public class CallAPIs : MonoBehaviour
     private int y;
     private int exploX;
     private int exploY;
+    private int contador = 0;
+    private int directoX;
+    private int directoY;
     [SerializeField] Image tick1;
     [SerializeField] Image tick2;
     [SerializeField] Image tick3;
@@ -267,6 +270,48 @@ private string url = "http://localhost:8080/barquitos/";
                 Debug.Log("HE DADOD HA:  "+ aw.tipoBarco);
                 // .destruido te dira "SI" si has destruido por completo ese tipo de barco o "NO" si no lo has destruido por completo
                 Debug.Log("SI LO HE DESTRUIDO:  "+ aw.destruido);
+                directoX = placementDX(changeLetterToInt(PlayerPrefs.GetString("ApuntaX")));
+                directoY = placementDY(int.Parse(PlayerPrefs.GetString("ApuntaY")));
+                if (contador == 0)
+                {
+                    tick1.GetComponent<RectTransform>().anchoredPosition = new Vector2 (directoX, directoY);
+                    contador++;
+                }
+                else if (contador == 1)
+                {
+                    tick2.GetComponent<RectTransform>().anchoredPosition = new Vector2 (directoX, directoY);
+                    contador++;
+                }
+                else if (contador == 2)
+                {
+                    tick3.GetComponent<RectTransform>().anchoredPosition = new Vector2 (directoX, directoY);
+                    contador++;
+                }
+                else if (contador == 3)
+                {
+                    tick4.GetComponent<RectTransform>().anchoredPosition = new Vector2 (directoX, directoY);
+                    contador++;
+                }
+                else if (contador == 4)
+                {
+                    tick5.GetComponent<RectTransform>().anchoredPosition = new Vector2 (directoX, directoY);
+                    contador++;
+                }
+                else if (contador == 5)
+                {
+                    tick6.GetComponent<RectTransform>().anchoredPosition = new Vector2 (directoX, directoY);
+                    contador++;
+                }
+                else if (contador == 6)
+                {
+                    tick7.GetComponent<RectTransform>().anchoredPosition = new Vector2 (directoX, directoY);
+                    contador++;
+                }
+                else if (contador == 7)
+                {
+                    tick8.GetComponent<RectTransform>().anchoredPosition = new Vector2 (directoX, directoY);
+                    contador++;
+                }
             }
             else
             {
@@ -549,6 +594,88 @@ private string url = "http://localhost:8080/barquitos/";
                 numero3 = -370;
                 break;
             case "9":
+                numero3 = -460;
+                break;
+            default:
+                break;
+        }
+        return numero3;
+    }
+
+    private int placementDX(int coor)
+    {
+        int numero2 = 0;
+        switch (coor)
+        {
+            case 0:
+                numero2 = -40;
+                break;
+            case 1:
+                numero2 = 50;
+                break;
+            case 2:
+                numero2 = 150;
+                break;
+            case 3:
+                numero2 = 240;
+                break;
+            case 4:
+                numero2 = 340;
+                break;
+            case 5:
+                numero2 = 430;
+                break;
+            case 6:
+                numero2 = 530;
+                break;
+            case 7:
+                numero2 = 620;
+                break;
+            case 8:
+                numero2 = 720;
+                break;
+            case 9:
+                numero2 = 810;
+                break;
+            default:
+                break;
+        }
+        return numero2;
+    }
+
+    private int placementDY(int coor)
+    {
+        int numero3 = 0;
+        switch (coor)
+        {
+            case 1:
+                numero3 = 390;
+                break;
+            case 2:
+                numero3 = 300;
+                break;
+            case 3:
+                numero3 = 200;
+                break;
+            case 4:
+                numero3 = 110;
+                break;
+            case 5:
+                numero3 = 10;
+                break;
+            case 6:
+                numero3 = -80;
+                break;
+            case 7:
+                numero3 = -180;
+                break;
+            case 8:
+                numero3 = -270;
+                break;
+            case 9:
+                numero3 = -370;
+                break;
+            case 10:
                 numero3 = -460;
                 break;
             default:
